@@ -46,6 +46,11 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 
+	<key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key><true/>
+    </dict>
+
 	<key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
 </dict>

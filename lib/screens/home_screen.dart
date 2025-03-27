@@ -9,12 +9,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(child: Center(child: Text('Hello World!'))),
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Image.asset(
+            'assets/images/village_of_bangladesh.jpg',
+            width: 400,
+            height: 150,
+          ),
+        ),
+      ),
     );
   }
 
