@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterchallenge/screens/splash_screen.dart';
+import 'package:flutterchallenge/themes/theme.dart';
+import 'package:flutterchallenge/themes/util.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,14 +10,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = View.of(context).platformDispatcher.platformBrightness;
+    TextTheme textTheme = createTextTheme(context, "Lato", "Open Sans");
+    MaterialTheme theme = MaterialTheme(textTheme);
     return MaterialApp(
       title: 'Flutter',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: brightness == Brightness.light ? theme.light() : theme.dark(),
       home: SplashScreen(),
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
