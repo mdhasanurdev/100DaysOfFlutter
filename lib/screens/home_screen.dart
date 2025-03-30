@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutterchallenge/screens/about_screen.dart';
 import 'package:flutterchallenge/values/strings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,6 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(fontSize: 14.0),
                     textAlign: TextAlign.justify,
                   ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => AboutScreen()),
+                    );
+                  },
+                  child: Text('next page'.toUpperCase()),
                 ),
               ],
             ),
