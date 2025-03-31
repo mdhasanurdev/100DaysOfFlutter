@@ -14,6 +14,31 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('100 Days Of Flutter'),
+        centerTitle: false,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('Welcome'),
+            ),
+            ListTile(
+              title: const Text('Home'),
+              leading: Icon(Icons.home),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text('Settings'),
+              leading: Icon(Icons.settings),
+              onTap: () {},
+            )
+          ],
+        ),
+      ),
       body: PopScope(
         canPop: false,
         child: SafeArea(
