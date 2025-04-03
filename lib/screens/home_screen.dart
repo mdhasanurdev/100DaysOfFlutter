@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterchallenge/screens/about_screen.dart';
+import 'package:flutterchallenge/screens/setting_screen.dart';
 import 'package:flutterchallenge/values/strings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,7 +32,20 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               title: const Text('Settings'),
               leading: Icon(Icons.settings),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => SettingScreen()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('About'),
+              leading: Icon(Icons.info),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => AboutScreen()),
+                );
+              },
             ),
           ],
         ),
