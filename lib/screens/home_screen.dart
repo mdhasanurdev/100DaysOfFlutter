@@ -30,20 +30,20 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {},
             ),
             ListTile(
-              title: const Text('Settings'),
-              leading: Icon(Icons.settings),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => SettingScreen()),
-                );
-              },
-            ),
-            ListTile(
               title: const Text('About'),
               leading: Icon(Icons.info),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => AboutScreen()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Settings'),
+              leading: Icon(Icons.settings),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => SettingScreen()),
                 );
               },
             ),
