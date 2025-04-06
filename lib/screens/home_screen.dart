@@ -12,9 +12,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(title: Text('100 Days Of Flutter'), centerTitle: false),
       drawer: Drawer(
         child: ListView(
@@ -22,21 +25,21 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(color: Colors.blue),
-              child: Center(child: Text('Hello World!')),
+              child: Center(
+                child: Text(
+                  '100 days of flutter'.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
             ListTile(
               title: const Text('Home'),
               leading: Icon(Icons.home),
               onTap: () {},
-            ),
-            ListTile(
-              title: const Text('About'),
-              leading: Icon(Icons.info),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => AboutScreen()),
-                );
-              },
             ),
             ListTile(
               title: const Text('Settings'),
@@ -52,6 +55,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: PopScope(
         canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (!didPop) {
+            if (_scaffoldKey.currentState?.isDrawerOpen ?? false) {
+              Navigator.of(context).pop();
+            } else {
+              final snackBar = SnackBar(content: const Text('Exit!'));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
+          }
+        },
         child: SafeArea(
           child: Center(
             child: Column(
