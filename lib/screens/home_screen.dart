@@ -60,8 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (_scaffoldKey.currentState?.isDrawerOpen ?? false) {
               Navigator.of(context).pop();
             } else {
-              final snackBar = SnackBar(content: const Text('Exit!'));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              _onBackPressed();
             }
           }
         },
@@ -91,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       MaterialPageRoute(builder: (context) => AboutScreen()),
                     );
                   },
-                  child: Text('next page'.toUpperCase()),
+                  child: Text('about page'.toUpperCase()),
                 ),
               ],
             ),
@@ -105,5 +104,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.initState();
+  }
+
+  Future<void> _onBackPressed() async {
+    final snackBar = SnackBar(content: const Text('Exit!'));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
