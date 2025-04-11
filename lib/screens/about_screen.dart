@@ -6,8 +6,13 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('About Us!'),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Align(alignment: Alignment.center, child: Text('About Us!')),
+          ],
+        ),
       ),
     );
   }
