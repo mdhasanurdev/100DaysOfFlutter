@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterchallenge/screens/about_screen.dart';
@@ -61,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (_scaffoldKey.currentState?.isDrawerOpen ?? false) {
               Navigator.of(context).pop();
             } else {
-              _onBackPressed();
+              _onBackPressed(context);
             }
           }
         },
@@ -107,8 +109,71 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  Future<void> _onBackPressed() async {
-    final snackBar = SnackBar(content: const Text('Exit!'));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  Future<bool> _onBackPressed(BuildContext context) async {
+    final result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Exit App',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Are you sure?',
+                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.grey[700],
+                        backgroundColor: Colors.grey[200],
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                      ),
+                      onPressed: () => Navigator.pop(context, false),
+                      child: Text('Cancel'),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.redAccent,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                      ),
+                      onPressed: () => Navigator.pop(context, true),
+                      child: Text('Exit'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    if (result == true) {
+      if (Platform.isAndroid) {
+        SystemNavigator.pop();
+      } else if (Platform.isIOS) {
+        exit(0);
+      }
+    }
+
+    return false;
   }
+
 }

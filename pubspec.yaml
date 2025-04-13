@@ -92,6 +92,5 @@ flutter:
   # see https://flutter.dev/to/font-from-package
   assets:
     - assets/images/village_of_bangladesh.jpg
-    - assets/animations/settings.lottie
     - assets/animations/settings.json
 
