@@ -8,7 +8,11 @@ class SettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Lottie.asset('assets/animations/settings.json')
+        child: Lottie.asset(
+          'assets/animations/settings.json',
+          width: 100,
+          height: 100,
+        ),
       ),
     );
   }

@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterchallenge/screens/about_screen.dart';
+import 'package:flutterchallenge/screens/planner_screen.dart';
 import 'package:flutterchallenge/screens/setting_screen.dart';
 import 'package:flutterchallenge/values/strings.dart';
+import 'package:page_transition/page_transition.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,7 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(title: Text('100 Days Of Flutter'), centerTitle: false),
+      appBar: AppBar(
+        title: Text('100 Days Of Flutter'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        centerTitle: false,
+      ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -42,6 +48,20 @@ class _HomeScreenState extends State<HomeScreen> {
               title: const Text('Home'),
               leading: Icon(Icons.home),
               onTap: () => Navigator.of(context).pop(),
+            ),
+            ListTile(
+              title: const Text('Planner'),
+              leading: Icon(Icons.event_note),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    type: PageTransitionType.leftToRight,
+                    child: PlannerScreen(),
+                  ),
+                );
+              },
             ),
             ListTile(
               title: const Text('Settings'),
@@ -113,56 +133,61 @@ class _HomeScreenState extends State<HomeScreen> {
     final result = await showDialog<bool>(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Exit App',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-              SizedBox(height: 8),
-              Text(
-                'Are you sure?',
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-              ),
-              SizedBox(height: 16),
-              Row(
+      builder:
+          (context) => Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.grey[700],
-                        backgroundColor: Colors.grey[200],
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                      ),
-                      onPressed: () => Navigator.pop(context, false),
-                      child: Text('Cancel'),
-                    ),
+                  Text(
+                    'Exit App',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.redAccent,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
+                  SizedBox(height: 8),
+                  Text(
+                    'Are you sure?',
+                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.grey[700],
+                            backgroundColor: Colors.grey[200],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          onPressed: () => Navigator.pop(context, false),
+                          child: Text('Cancel'),
+                        ),
                       ),
-                      onPressed: () => Navigator.pop(context, true),
-                      child: Text('Exit'),
-                    ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.redAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          onPressed: () => Navigator.pop(context, true),
+                          child: Text('Exit'),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
     );
 
     if (result == true) {
@@ -175,5 +200,4 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return false;
   }
-
 }
