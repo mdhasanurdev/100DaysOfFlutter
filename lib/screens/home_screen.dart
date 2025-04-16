@@ -52,13 +52,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               title: const Text('Planner'),
               leading: Icon(Icons.event_note),
-              onTap: () {
+              onTap: () async {
                 Navigator.of(context).pop();
+                await Future.delayed(Duration(milliseconds: 1000));
+                if (!context.mounted) return;
                 Navigator.push(
                   context,
                   PageTransition(
                     type: PageTransitionType.leftToRight,
+                    duration: Duration(milliseconds: 400),
                     child: PlannerScreen(),
+                    curve: Curves.easeInOut,
                   ),
                 );
               },
@@ -66,10 +70,18 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               title: const Text('Settings'),
               leading: Icon(Icons.settings),
-              onTap: () {
+              onTap: () async {
                 Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => SettingScreen()),
+                await Future.delayed(Duration(milliseconds: 1000));
+                if (!context.mounted) return;
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    type: PageTransitionType.leftToRight,
+                    duration: Duration(milliseconds: 400),
+                    child: SettingScreen(),
+                    curve: Curves.easeInOut,
+                  ),
                 );
               },
             ),
