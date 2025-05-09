@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class PlannerScreen extends StatelessWidget {
   const PlannerScreen({super.key});
@@ -6,12 +7,13 @@ class PlannerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Planner'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        automaticallyImplyLeading: false,
+      body: Center(
+        child: Lottie.asset(
+          'assets/animations/planner.json',
+          width: 100,
+          height: 100,
+        ),
       ),
-      body: Center(child: Text('Planner')),
     );
   }
 }

@@ -94,4 +94,5 @@ flutter:
   assets:
     - assets/images/village_of_bangladesh.jpg
     - assets/animations/settings.json
+    - assets/animations/planner.json
 
