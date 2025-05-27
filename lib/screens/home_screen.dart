@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 150,
                 ),
                 SizedBox(height: 10.0),
-                Text(title, style: TextStyle(fontSize: 20.0)),
+                Text(title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
                 Container(
                   margin: EdgeInsets.all(10.0),
                   child: Text(
